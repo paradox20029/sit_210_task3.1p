@@ -4,7 +4,7 @@
   Arduino IoT Cloud Variables description
   The following variables are automatically generated and updated when changes are made to the Thing
 
-  int light;
+  int lightIntensity;
   bool led_state;
 
   Variables which are marked as READ/WRITE in the Cloud Thing will also have functions
@@ -16,15 +16,15 @@
 #include <BH1750FVI.h>
 
 // Create the Lightsensor instance
-BH1750FVI LightSensor(BH1750FVI::k_DevModeContLowRes);
+BH1750FVI LightSensorObject(BH1750FVI::k_DevModeContLowRes);
 
 void setup() {
   
-  Serial.begin(115200);
-  LightSensor.begin();
+  Serial.begin(96000);
+  LightSensorObject.begin();
   // Initialize serial and wait for port to open:
   // This delay gives the chance to wait for a Serial Monitor without blocking if none is found
-  delay(1500); 
+  delay(3000); 
 
   // Defined in thingProperties.h
   initProperties();
@@ -50,9 +50,9 @@ void loop() {
   ArduinoCloud.update();
   // Your code here 
   digitalWrite(LED_BUILTIN, led_state);
-  light = LightSensor.GetLightIntensity();
+  lightIntensity = LightSensorObject.GetLightIntensity();
  
-  delay(700);
+  delay(2000);
   
 }
 
